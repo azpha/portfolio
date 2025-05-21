@@ -4,7 +4,7 @@ import Footer from "./Footer";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-zinc-900 via-zinc-800 to-zinc-900">
+    <main className="min-h-screen bg-gradient-to-b from-zinc-900 via-zinc-800 to-zinc-900 relative">
       <div className="py-2 flex justify-center select-none">
         <Header />
       </div>
@@ -13,8 +13,10 @@ export default function Layout({ children }: { children: ReactNode }) {
         {children}
       </div>
 
-      <div className="pt-4 pb-4">
-        <Footer />
+      <div className="py-8">
+        <div className="absolute bottom-0 w-full mb-2">
+          <Footer />
+        </div>
       </div>
     </main>
   );

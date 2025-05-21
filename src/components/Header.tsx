@@ -15,9 +15,9 @@ export default function Header() {
           <a href="/#about-me">
             <li className="inline">About</li>
           </a>
-          {/* <a href="/links">
+          <a href="/links">
             <li className="inline">Links</li>
-          </a> */}
+          </a>
           <a href="/#contact">
             <li className="inline">Contact</li>
           </a>

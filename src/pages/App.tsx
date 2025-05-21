@@ -1,6 +1,6 @@
-import ContactForm from "./components/ContactForm";
-import Layout from "./components/Layout";
-import Section from "./components/Section";
+import ContactForm from "../components/ContactForm";
+import Layout from "../components/Layout";
+import Section from "../components/Section";
 
 export default function App() {
   return (
