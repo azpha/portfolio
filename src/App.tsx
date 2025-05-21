@@ -11,13 +11,13 @@ export default function App() {
             a cliché SaaS website for funzies? hell yeah.
           </p>
         </div>
-        <h1 className="text-6xl font-bold mx-auto w-[320px] md:w-full">
+        <h1 className="text-6xl font-bold mx-auto w-[310px] md:w-full">
           Hi, I'm{" "}
-          <span className="drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+          <span className="drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] text-nowrap">
             Alex Frantz
           </span>
         </h1>
-        <p className="my-2 text-2xl opacity-80">
+        <p className="my-2 text-2xl opacity-80 w-[310px] md:w-full mx-auto">
           Working as QA & mediocre coder @{" "}
           <a href="https://medal.tv" target="_blank">
             Medal
@@ -107,7 +107,7 @@ export default function App() {
           <div className="my-4">
             <div className="pb-8">
               <h1 className="text-center text-6xl font-bold">hit me up</h1>
-              <p className="pr-42 opacity-50">fr ong no cap.</p>
+              <p className="opacity-50">fr ong no cap.</p>
             </div>
             <ContactForm />
           </div>
