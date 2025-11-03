@@ -1,7 +1,0 @@
-@import 'tailwindcss';
-
-body {
-  overflow-x: hidden;
-  touch-action: pan-y;
-  background-color: #18181b;
-}
