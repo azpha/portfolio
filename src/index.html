@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex Frantz - QA/Software Developer</title>
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Alex Frantz - QA/Software Developer</title>
 
-    <!-- opengraph tags -->
-    <meta property="og:image" content="https://storage.alexav.gg/content/picturev2.jpg">
-    <meta property="og:title" content="Alex Frantz - QA/Software Developer">
-    <meta property="og:url" content="https://afrantz.com">
-    <meta property="og:site_name" content="Alex Frantz - QA/Software Developer">
-    <meta property="og:description" content="I'm Alex(avier) frantz, a manual QA tester and software engineer, doing frontend & backend things in the gaming space.">
+      <!-- opengraph tags -->
+      <meta property="og:image" content="https://storage.alexav.gg/content/picturev2.jpg">
+      <meta property="og:title" content="Alex Frantz - QA/Software Developer">
+      <meta property="og:url" content="https://afrantz.com">
+      <meta property="og:site_name" content="Alex Frantz - QA/Software Developer">
+      <meta property="og:description" content="I'm Alex(avier) frantz, a manual QA tester and software engineer, doing frontend & backend things in the gaming space.">
 
-    <!-- twitter tags -->
-    <meta name="twitter:title" content="Alex Frantz - QA/Software Developer">
-    <meta name="twitter:descirption" content="I'm Alex(avier) frantz, a manual QA tester and software engineer, doing frontend & backend things in the gaming space.">
-    <meta name="twitter:image" content="https://storage.alexav.gg/content/picturev2.jpg">
-    <meta name="twitter:card" content="summary">
+      <!-- twitter tags -->
+      <meta name="twitter:title" content="Alex Frantz - QA/Software Developer">
+      <meta name="twitter:descirption" content="I'm Alex(avier) frantz, a manual QA tester and software engineer, doing frontend & backend things in the gaming space.">
+      <meta name="twitter:image" content="https://storage.alexav.gg/content/picturev2.jpg">
+      <meta name="twitter:card" content="summary">
 
-    <!-- plain meta -->
-    <meta name="title" content="Alex Frantz - QA/Software Developer">
-    <meta name="description" content="I'm Alex(avier) frantz, a manual QA tester and software engineer, doing frontend & backend things in the gaming space.">
-    <meta name="keywords" content="alexavier frantz, alex frantz, alex frantz software developer, alex frantz new york, qa, javascript, html, react, python, java, alexavier, alexfrantz">
+      <!-- plain meta -->
+      <meta name="title" content="Alex Frantz - QA/Software Developer">
+      <meta name="description" content="I'm Alex(avier) frantz, a manual QA tester and software engineer, doing frontend & backend things in the gaming space.">
+      <meta name="keywords" content="alexavier frantz, alex frantz, alex frantz software developer, alex frantz new york, qa, javascript, html, react, python, java, alexavier, alexfrantz">
 
-    <!-- scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script defer data-domain="afrantz.com" src="https://metrics.alexav.gg/js/script.outbound-links.js"></script>
-</head>
-  <body class="bg-linear-to-br from-neutral-900 to-neutral-800 text-white min-h-screen flex items-center justify-center p-4">
+      <!-- scripts -->
+      <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+      <script defer data-domain="afrantz.com" src="https://metrics.alexav.gg/js/script.outbound-links.js"></script>
+  </head>
+  <body class="bg-linear-to-br from-zinc-900 to-zinc-800 text-white min-h-screen flex items-center justify-center p-4">
       <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-auto">
           <!-- top-left big card -->
           <div class="md:col-span-3 md:row-span-2 bg-linear-to-br from-neutral-800 to-neutral-500 rounded-2xl p-8 flex flex-col justify-between shadow-xl hover:scale-105 transition-transform duration-300">
@@ -105,8 +105,8 @@
               <div class="w-10 h-10 bg-white/30 rounded-lg mb-3">
                 <img alt="Buffalo Bills Logo" src="https://storage.alexav.gg/content/bills.png" width="150" />
               </div>
-              <h3 class="text-xl font-bold text-white">Buffalo Bills</h3>
-              <p>Score coming soon</p>
+              <h3 class="text-xl font-bold text-white" id="bills-game-title">Buffalo Bills</h3>
+              <p id="bills-game-score">Score coming soon</p>
           </div>
       </div>
   </body>
@@ -163,6 +163,22 @@
     })
     .catch((e) => {
       console.error("Failed to load music data", e)
+    })
+
+    fetch("https://api.alexav.gg/v4/football/bills", {
+      method: 'get'
+    }).then(async (res) => {
+      if (res.ok) {
+        const data = await res.json()
+
+        let billsGameTitle = document.querySelector("#bills-game-title")
+        let billsGameScore = document.querySelector("#bills-game-score")
+
+        billsGameTitle.textContent = data["data"]["name"]
+        billsGameScore.textContent = data["data"]["score"]
+      }
+    }).catch((e) => {
+      console.error("Failed to load Bills score", e)
     })
   </script>
 
