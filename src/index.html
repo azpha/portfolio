@@ -112,35 +112,41 @@
   </body>
 
   <script>
-    fetch("https://api.alexav.gg/v4/tracker/latestGame")
+    const baseUrl = "https://api.alexav.gg/v4"
+
+    fetch(`${baseUrl}/tracker/latestGame`)
     .then(async (res) => {
       if (res.ok) {
         const data = await res.json()
-
-        const first3Games = data.data.history.slice(0, 3)
         const gamesPlayedContainer = document.querySelector("#games-played")
-        gamesPlayedContainer.children[0].remove(gamesPlayedContainer.children[0])
-        for (const game of first3Games) {
-          const parent = document.createElement('div')
-          let title = document.createElement('h2')
-          let date = document.createElement('p')
 
-          title.textContent = game.game
-          title.setAttribute('class', 'font-bold')
-          date.textContent = new Date(game.startedPlayingAt).toLocaleDateString()
+        if (data?.history) {
+          const first3Games = data.history.slice(0, 3)
+          gamesPlayedContainer.children[0].remove(gamesPlayedContainer.children[0])
+          for (const game of first3Games) {
+              const parent = document.createElement('div')
+              let title = document.createElement('h2')
+              let date = document.createElement('p')
 
-          parent.setAttribute("class", "inline-block")
-          parent.appendChild(title)
-          parent.appendChild(date)
-          gamesPlayedContainer.appendChild(parent)
+              title.textContent = game.game
+              title.setAttribute('class', 'font-bold')
+              date.textContent = new Date(game.startedPlayingAt).toLocaleDateString()
+
+              parent.setAttribute("class", "inline-block")
+              parent.appendChild(title)
+              parent.appendChild(date)
+              gamesPlayedContainer.appendChild(parent)
+            }
+          } else {
+            gamesPlayedContainer.textContent = "No recently played games :("
+          }
         }
-      }
     })
     .catch((e) => {
       console.error("Failed to load game data", e)
     })
 
-    fetch("https://api.alexav.gg/v4/social/music")
+    fetch(`${baseUrl}/social/music`)
     .then(async (res) => {
       if (res.ok) {
         const data = await res.json()
@@ -149,13 +155,13 @@
         let musicArtist = document.querySelector('#music-artist')
         let musicImage = document.querySelector('#music-image')
 
-        musicTitle.textContent = data.data.title
-        musicArtist.textContent = data.data.artist
+        musicTitle.textContent = data.title
+        musicArtist.textContent = data.artist
 
         const image = document.createElement('img')
-        const smallImageUrl = data.data.images.filter((v) => v.size == "small")[0].url
+        const smallImageUrl = data.images.filter((v) => v.size == "small")[0].url
         image.setAttribute('src', smallImageUrl)
-        image.setAttribute('alt', `${data.data.title} Song Cover`)
+        image.setAttribute('alt', `${data.title} Song Cover`)
         image.setAttribute('class', 'rounded-lg')
         image.setAttribute('width', '150')
         musicImage.appendChild(image)
@@ -165,7 +171,7 @@
       console.error("Failed to load music data", e)
     })
 
-    fetch("https://api.alexav.gg/v4/football/bills", {
+    fetch(`${baseUrl}/football/bills`, {
       method: 'get'
     }).then(async (res) => {
       if (res.ok) {
@@ -174,8 +180,8 @@
         let billsGameTitle = document.querySelector("#bills-game-title")
         let billsGameScore = document.querySelector("#bills-game-score")
 
-        billsGameTitle.textContent = data["data"]["name"]
-        billsGameScore.textContent = data["data"]["score"]
+        billsGameTitle.textContent = data["name"]
+        billsGameScore.textContent = data["score"]
       }
     }).catch((e) => {
       console.error("Failed to load Bills score", e)
